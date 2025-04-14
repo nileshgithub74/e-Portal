@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background Circle with Gradient -->
+    <circle cx="100" cy="100" r="90" fill="url(#gradient)" />
+    
+    <!-- Letter E with Modern Design -->
+    <path d="M60 60h80v20H60z M60 90h60v20H60z M60 120h80v20H60z" fill="white"/>
+    
+    <!-- Portal Circle -->
+    <circle cx="160" cy="70" r="15" fill="white" stroke="url(#gradient)" stroke-width="3"/>
+    <circle cx="160" cy="70" r="8" fill="url(#gradient)"/>
+    
+    <!-- Decorative Elements -->
+    <circle cx="100" cy="100" r="85" stroke="white" stroke-width="2" fill="none"/>
+    <circle cx="100" cy="100" r="75" stroke="white" stroke-width="1" fill="none" stroke-dasharray="4 4"/>
+    
+    <!-- Gradient Definition -->
+    <defs>
+        <linearGradient id="gradient" x1="0" y1="0" x2="200" y2="200" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#4f46e5"/>
+            <stop offset="50%" stop-color="#6366f1"/>
+            <stop offset="100%" stop-color="#818cf8"/>
+        </linearGradient>
+    </defs>
+</svg> 
