@@ -1,18 +1,17 @@
 @extends('layouts.app')
 
-@section('title', 'Login')
-
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card shadow-lg border-0 rounded-lg mt-5">
                 <div class="card-header bg-primary text-white">
-                    <h3 class="text-center font-weight-light my-2">Login to Your Account</h3>
+                    <h3 class="text-center font-weight-light my-2">Reset Password</h3>
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="POST" action="{{ route('password.update') }}">
                         @csrf
+                        <input type="hidden" name="token" value="{{ $token }}">
 
                         <div class="form-floating mb-3">
                             <input type="email" class="form-control @error('email') is-invalid @enderror" 
@@ -28,8 +27,8 @@
 
                         <div class="form-floating mb-3">
                             <input type="password" class="form-control @error('password') is-invalid @enderror" 
-                                   id="password" name="password" placeholder="Password" required>
-                            <label for="password">Password</label>
+                                   id="password" name="password" placeholder="New Password" required>
+                            <label for="password">New Password</label>
                             @error('password')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -37,31 +36,27 @@
                             @enderror
                         </div>
 
-                        <div class="form-check mb-3">
-                            <input class="form-check-input" type="checkbox" name="remember" id="remember" 
-                                   {{ old('remember') ? 'checked' : '' }}>
-                            <label class="form-check-label" for="remember">
-                                Remember Me
-                            </label>
+                        <div class="form-floating mb-4">
+                            <input type="password" class="form-control" 
+                                   id="password_confirmation" name="password_confirmation" 
+                                   placeholder="Confirm Password" required>
+                            <label for="password_confirmation">Confirm Password</label>
                         </div>
 
-                        <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                            <a class="small text-decoration-none" href="{{ route('password.request') }}">
-                                Forgot Password?
-                            </a>
-                            <button type="submit" class="btn btn-primary">
-                                Login
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                Reset Password
                             </button>
                         </div>
                     </form>
                 </div>
                 <div class="card-footer text-center py-3">
                     <div class="small">
-                        Need an account? <a href="{{ route('register') }}">Sign up!</a>
+                        <a href="{{ route('login') }}">Back to login</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-@endsection
+@endsection 

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Models\ContactMessage;
+use App\Mail\ContactFormMail;
+use Illuminate\Support\Facades\Log;
 
 class ContactController extends Controller
 {
@@ -23,11 +25,28 @@ class ContactController extends Controller
             'message' => 'required|string',
         ]);
 
-        // Store the message in the database
-        ContactMessage::create($validated);
+        try {
+            // Store the message in the database
+            ContactMessage::create($validated);
 
-        return redirect()->route('contact')
-            ->with('success', 'Thank you for your message! We will get back to you soon.');
+            // Log the attempt to send email
+            Log::info('Attempting to send email to: ' . config('mail.admin_email', 'kumarniilesh843127@gmail.com'));
+            
+            // Send email
+            Mail::to('kumarniilesh843127@gmail.com')->send(new ContactFormMail($validated));
+            
+            // Log success
+            Log::info('Email sent successfully');
+
+            return redirect()->route('contact')
+                ->with('success', 'Thank you for your message! We will get back to you soon.');
+        } catch (\Exception $e) {
+            // Log the error
+            Log::error('Failed to send email: ' . $e->getMessage());
+            
+            return redirect()->route('contact')
+                ->with('error', 'There was an issue sending your message. Please try again later.');
+        }
     }
 
     public function messages()
